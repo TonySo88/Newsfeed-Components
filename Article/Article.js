@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'New Article',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -112,3 +128,49 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+function componentCreator(titleData, dateData, firstParagraphData, secondParagraphData, thirdParagraphData) {
+  const article = document.createElement('div');
+  article.classList.add('article');
+
+  const title = document.createElement('h2');
+  title.textContent = titleData;
+
+  const date = document.createElement('p');
+  date.classList.add('date');
+  date.textContent = dateData;
+
+  const firstParagraph = document.createElement('p');
+  firstParagraph.textContent = firstParagraphData;
+
+  const secondParagraph = document.createElement('p');
+  secondParagraph.textContent = secondParagraphData;
+
+  const thirdParagraph = document.createElement('p');
+  thirdParagraph.textContent = thirdParagraphData;
+
+  const expandButton = document.createElement('span');
+  expandButton.classList.add('expandButton')
+  expandButton.textContent = "click here to expand"
+
+  expandButton.addEventListener('click', (event) => {
+    article.classList.toggle('article-open')
+  })
+
+  article.appendChild(title)
+  article.appendChild(date)
+  article.appendChild(firstParagraph)
+  article.appendChild(secondParagraph)
+  article.appendChild(thirdParagraph)
+  article.appendChild(expandButton)
+
+  return article;
+}
+
+const articles = document.querySelector('.articles');
+
+data.map((dataObject) =>{
+  const allData = componentCreator(dataObject.title, dataObject.date, dataObject.firstParagraph, dataObject.secondParagraph, dataObject.thirdParagraph);
+  console.log(dataObject)
+  articles.appendChild(allData);
+})
